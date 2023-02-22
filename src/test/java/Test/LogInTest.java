@@ -14,7 +14,6 @@ public class LogInTest {
     private WebDriver driver;
     final String EMAIL = "testUser@test.ru";
     final String PASSWORD = "testUser@test.ru";
-    final String MAIN_PAGE_URL = "https://stellarburgers.nomoreparties.site/";
 
     @Before
     public void startUp() {

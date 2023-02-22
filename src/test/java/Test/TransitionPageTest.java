@@ -2,7 +2,6 @@ package Test;
 
 import Pages.HeaderBar;
 import Pages.LogInPage;
-import Pages.MainPage;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.After;
 import org.junit.Before;

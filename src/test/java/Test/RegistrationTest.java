@@ -12,19 +12,10 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.io.StringReader;
-import java.time.Duration;
-
-import static org.junit.Assert.assertEquals;
 
 public class RegistrationTest {
     private WebDriver driver;
     Faker faker = new Faker();
-    final String LOGIN_PAGE_URL = "https://stellarburgers.nomoreparties.site/login";
-
 
     @Before
     public void startUp() {

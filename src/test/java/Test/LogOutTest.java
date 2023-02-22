@@ -7,19 +7,15 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.time.Duration;
 
 public class LogOutTest {
     private WebDriver driver;
     final String EMAIL = "testUser@test.ru";
     final String PASSWORD = "testUser@test.ru";
-    final String LOGIN_PAGE_URL = "https://stellarburgers.nomoreparties.site/login";
     private HeaderBar headerBar;
     private LogInPage logInPage;
     private ProfilePage profilePage;
@@ -43,8 +39,8 @@ public class LogOutTest {
         headerBar.clickAccountButton(true);
         profilePage.clickExitButton();
 
-        new WebDriverWait(driver, Duration.ofSeconds(10))
-                .until(ExpectedConditions.urlToBe(LOGIN_PAGE_URL));
+        headerBar.clickAccountButton(false);
+        driver.findElement(By.xpath("//h2[text() = 'Вход']")).isDisplayed();
     }
 
     @After
