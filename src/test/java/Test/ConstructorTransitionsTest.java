@@ -33,17 +33,16 @@ public class ConstructorTransitionsTest {
         mainPage.clickConstructorBarFilling();
         mainPage.clickConstructorBarBan();
 
-        driver.findElement(By.xpath("//h2[text() = 'Булки']")).isDisplayed();
+        driver.findElement(By.xpath("//div[contains(@class, 'current')]/span[text() = 'Булки']")).isDisplayed();
     }
 
     @Test
     public void constructorTransitionSauce(){
         mainPage = new MainPage(driver);
 
-        mainPage.clickConstructorBarFilling();
         mainPage.clickConstructorBarSauce();
 
-        driver.findElement(By.xpath("//h2[text() = 'Соусы']")).isDisplayed();
+        driver.findElement(By.xpath("//div[contains(@class, 'current')]/span[text() = 'Соусы']")).isDisplayed();
     }
 
     @Test
@@ -52,7 +51,7 @@ public class ConstructorTransitionsTest {
 
         mainPage.clickConstructorBarFilling();
 
-        driver.findElement(By.xpath("//h2[text() = 'Начинки']")).isDisplayed();
+        driver.findElement(By.xpath("//div[contains(@class, 'current')]/span[text() = 'Начинки']")).isDisplayed();
     }
 
     @After

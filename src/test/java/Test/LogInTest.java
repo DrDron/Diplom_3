@@ -5,13 +5,10 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.time.Duration;
 
 public class LogInTest {
     private WebDriver driver;
@@ -32,11 +29,12 @@ public class LogInTest {
     public void logInMainPage(){
         MainPage mainPage = new MainPage(driver);
         LogInPage logInPage = new LogInPage(driver);
+        HeaderBar headerBar = new HeaderBar(driver);
 
         mainPage.clickLogInButton();
         logInPage.logInUser(EMAIL, PASSWORD, driver);
-        new WebDriverWait(driver, Duration.ofSeconds(10))
-                .until(ExpectedConditions.urlToBe(MAIN_PAGE_URL));
+        headerBar.clickAccountButton(true);
+        driver.findElement(By.xpath("//input[@value = '" + EMAIL.toLowerCase() + "']")).isDisplayed();
     }
 
     @Test
@@ -46,32 +44,37 @@ public class LogInTest {
 
         headerBar.clickAccountButton(false);
         logInPage.logInUser(EMAIL, PASSWORD, driver);
-        new WebDriverWait(driver, Duration.ofSeconds(10))
-                .until(ExpectedConditions.urlToBe(MAIN_PAGE_URL));
+
+        headerBar.clickAccountButton(true);
+        driver.findElement(By.xpath("//input[@value = '" + EMAIL.toLowerCase() + "']")).isDisplayed();
     }
 
     @Test
     public void logInRegistrationPage(){
+        HeaderBar headerBar = new HeaderBar(driver);
         driver.get("https://stellarburgers.nomoreparties.site/register");
         RegistrationPage registrationPage = new RegistrationPage(driver);
         LogInPage logInPage = new LogInPage(driver);
 
         registrationPage.clickLogIn();
         logInPage.logInUser(EMAIL, PASSWORD, driver);
-        new WebDriverWait(driver, Duration.ofSeconds(10))
-                .until(ExpectedConditions.urlToBe(MAIN_PAGE_URL));
+
+        headerBar.clickAccountButton(true);
+        driver.findElement(By.xpath("//input[@value = '" + EMAIL.toLowerCase() + "']")).isDisplayed();
     }
 
     @Test
     public void logInForgotPasswordPage(){
+        HeaderBar headerBar = new HeaderBar(driver);
         driver.get("https://stellarburgers.nomoreparties.site/forgot-password");
         ForgotPasswordPage forgotPasswordPage = new ForgotPasswordPage(driver);
         LogInPage logInPage = new LogInPage(driver);
 
         forgotPasswordPage.clickLogIn();
         logInPage.logInUser(EMAIL, PASSWORD, driver);
-        new WebDriverWait(driver, Duration.ofSeconds(10))
-                .until(ExpectedConditions.urlToBe(MAIN_PAGE_URL));
+
+        headerBar.clickAccountButton(true);
+        driver.findElement(By.xpath("//input[@value = '" + EMAIL.toLowerCase() + "']")).isDisplayed();
     }
 
     @After

@@ -36,5 +36,7 @@ public class LogInPage {
         logInPage.setEmailField(email);
         logInPage.setPasswordField(password);
         logInPage.clickLogInButton();
+        new WebDriverWait(driver, Duration.ofSeconds(10))
+                .until(ExpectedConditions.urlToBe("https://stellarburgers.nomoreparties.site/"));
     }
 }

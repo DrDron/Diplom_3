@@ -1,5 +1,7 @@
 package Test;
 
+import Pages.HeaderBar;
+import Pages.LogInPage;
 import Pages.RegistrationPage;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.After;
@@ -13,6 +15,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.io.StringReader;
 import java.time.Duration;
 
 import static org.junit.Assert.assertEquals;
@@ -47,14 +50,21 @@ public class RegistrationTest {
     @Test
     public void userRegistration(){
         RegistrationPage registrationPage = new RegistrationPage(driver);
+        HeaderBar headerBar = new HeaderBar(driver);
+        LogInPage logInPage = new LogInPage(driver);
+        String email = faker.internet().emailAddress();
+        String password = faker.internet().password(6,10);
 
         registrationPage.setNameField(faker.name().lastName());
-        registrationPage.setEmailField(faker.internet().emailAddress());
-        registrationPage.setPasswordField(faker.internet().password(6,10));
+        registrationPage.setEmailField(email);
+        registrationPage.setPasswordField(password);
         registrationPage.clickRegistrationButton();
 
-        new WebDriverWait(driver, Duration.ofSeconds(10))
-                .until(ExpectedConditions.urlToBe(LOGIN_PAGE_URL));
+        headerBar.clickAccountButton(false);
+        logInPage.logInUser(email,password,driver);
+        headerBar.clickAccountButton(true);
+
+        driver.findElement(By.xpath("//input[@value = '" + email.toLowerCase() + "']")).isDisplayed();
     }
 
     @After
